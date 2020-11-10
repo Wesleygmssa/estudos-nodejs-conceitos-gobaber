@@ -1,5 +1,11 @@
 import { isEqual } from 'date-fns';
 import Appointment from '../models/Appointment';
+
+interface CreateAppointmentDTO {
+    provider: string;
+    date: Date;
+}
+
 //listar deletar , operações banco de dados
 class AppointmentsRepository {
 
@@ -23,9 +29,9 @@ class AppointmentsRepository {
         return findAppointment || null;
     }
 
-    public create(provider: string, date: Date): Appointment {
+    public create({ provider, date }: CreateAppointmentDTO): Appointment {
 
-        const appointment = new Appointment(provider, date);
+        const appointment = new Appointment({ provider, date });
 
         this.appointments.push(appointment)
 
