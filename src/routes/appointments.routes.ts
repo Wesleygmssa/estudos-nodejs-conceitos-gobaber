@@ -12,7 +12,7 @@ const appointmentsRouter = Router();
 
 
 
-appointmentsRouter.get('/', async (request, response) => {
+appointmentsRouter.get('/appointments', async (request, response) => {
 
     const appointmentRepository = getCustomRepository(AppointmentsRepository);
     const appointments = await appointmentRepository.find();
@@ -22,7 +22,7 @@ appointmentsRouter.get('/', async (request, response) => {
 
 
 
-appointmentsRouter.post('/', async (request, response) => {
+appointmentsRouter.post('/appointments', async (request, response) => {
 
     try { //TRATATIVA DE ERRO.
         const { provider, date } = request.body;
