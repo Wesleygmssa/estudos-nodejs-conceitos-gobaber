@@ -3,12 +3,16 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentServices from '../services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
 
 const appointmentsRouter = Router();
+
+appointmentsRouter.use(ensureAuthenticated); // aplicanto middlewares em todas as rotas
 
 appointmentsRouter.get('/', async (request, response) => {
 
