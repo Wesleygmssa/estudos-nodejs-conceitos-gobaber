@@ -28,7 +28,7 @@ class CreateUserSerive {
             password: hasgedPassword,
         });
 
-        delete user.password;
+        // delete user.password;
 
         await usersRepository.save(user)
 
