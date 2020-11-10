@@ -10,9 +10,7 @@ import { getCustomRepository } from 'typeorm';
 
 const appointmentsRouter = Router();
 
-
-
-appointmentsRouter.get('/appointments', async (request, response) => {
+appointmentsRouter.get('/', async (request, response) => {
 
     const appointmentRepository = getCustomRepository(AppointmentsRepository);
     const appointments = await appointmentRepository.find();
@@ -20,18 +18,16 @@ appointmentsRouter.get('/appointments', async (request, response) => {
     return response.json(appointments);
 });
 
-
-
-appointmentsRouter.post('/appointments', async (request, response) => {
+appointmentsRouter.post('/', async (request, response) => {
 
     try { //TRATATIVA DE ERRO.
-        const { provider, date } = request.body;
+        const { provider_id, date } = request.body;
 
         const parseDate = parseISO(date);
 
         const createAppointment = new CreateAppointmentServices();
 
-        const appointment = await createAppointment.execute({ provider, date: parseDate })
+        const appointment = await createAppointment.execute({ provider_id, date: parseDate })
 
         return response.json(appointment);
 
