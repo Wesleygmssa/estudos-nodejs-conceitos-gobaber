@@ -1,39 +1,45 @@
+// Rota: Receber a requisição, chamar outro arquivo, devolver uma resposta
+
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
+
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
-import CreateAppointmentService from '../services/CreateAppointmentService';
+import CreateAppointmentServices from '../services/CreateAppointmentService';
+import { getCustomRepository } from 'typeorm';
 
 const appointmentsRouter = Router();
 
-const appointmentsRepository = new AppointmentsRepository();
 
-appointmentsRouter.get('/appointments', (request, response) => {
 
-    const appointments = appointmentsRepository.all();
+appointmentsRouter.get('/', async (request, response) => {
+
+    const appointmentRepository = getCustomRepository(AppointmentsRepository);
+    const appointments = await appointmentRepository.find();
 
     return response.json(appointments);
-})
+});
 
-appointmentsRouter.post('/appointments', (request, response) => {
 
-    try {
 
+appointmentsRouter.post('/', async (request, response) => {
+
+    try { //TRATATIVA DE ERRO.
         const { provider, date } = request.body;
 
-        const parsedDate = parseISO(date);
+        const parseDate = parseISO(date);
 
-        const createAppointment = new CreateAppointmentService(appointmentsRepository);
+        const createAppointment = new CreateAppointmentServices();
 
-        const appointment = createAppointment.execute({ provider, date: parsedDate })
+        const appointment = await createAppointment.execute({ provider, date: parseDate })
 
         return response.json(appointment);
 
-    } catch (err) {
+    } catch (error) { // throw Error('this appointment is already booked');
 
-        return response.status(400).json({ error: err.message })
+        return response.status(400).json({ error: error.message });
     }
-})
+});
 
 
-export default appointmentsRouter;
+export default appointmentsRouter

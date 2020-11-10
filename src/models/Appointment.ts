@@ -1,16 +1,19 @@
+//MODELS ESTÁ RELACIONADO COM UMA TABELA NO BANCO DE DADOS
+
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('appointments')
-class Appointment {
 
+@Entity('appointments') //ENVIA A CLASS COMO PARAMNETRO PARA ENTIDADE.
+class Appointment {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
     provider: string;
 
-    @Column('time with time zone')
+    @Column('timestamp with time zone')
     date: Date;
+
 
 }
 

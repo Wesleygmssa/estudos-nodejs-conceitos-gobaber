@@ -1,39 +1,41 @@
-import { startOfHour } from 'date-fns';
+
+//RESPONSAVEL PELA CRIAÇÃO DO AGENDAMENTO // REGRA DE NEGOCIO
+
 import Appointment from '../models/Appointment';
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
+import { startOfHour, } from 'date-fns';
+import AppointmentsRepository from '../repositories/AppointmentsRepository'; //PARA USAR O REPOSITORIO EXISTENTE
+import { getCustomRepository } from 'typeorm';
 
 interface Request {
-    date: Date;
-    provider: string;
+    provider: string,
+    date: Date,
 }
 
-// const appointmentsRepository = new AppointmentsRepository();
-
 class CreateAppointmentService {
-    private appointmentsRepository;
 
-    constructor(appointmentsRepository: AppointmentsRepository) {
-        this.appointmentsRepository = appointmentsRepository;
-    }
+    public async execute({ provider, date }: Request): Promise<Appointment> {
 
-    public execute({ provider, date }: Request): Appointment {
+        const appointmentsRepository = getCustomRepository(AppointmentsRepository); //PARA USAR O REPOSITORIO EXISTENTE
 
         const appointmentDate = startOfHour(date);
 
-        const findAppointmentInSameDate = this.appointmentsRepository.findByDate(appointmentDate);
+        const FindAppointmentInSameDate = await appointmentsRepository.findByDate(
+            appointmentDate
+        );
 
-        if (findAppointmentInSameDate) {
+        if (FindAppointmentInSameDate) { //Verificar trativa de erro na rota
 
-            throw Error('This appointment is already booked');
+            throw Error('this appointment is already booked');
         }
 
-        const appointment = this.appointmentsRepository.create({
+        const appointment = appointmentsRepository.create({
             provider,
             date: appointmentDate
         });
 
-        return appointment;
+        await appointmentsRepository.save(appointment); //SALVANDO NO BANCO DE DADOS
+
+        return appointment //RETORNADO UM AGENDAMENTO
     }
 }
-
 export default CreateAppointmentService;
