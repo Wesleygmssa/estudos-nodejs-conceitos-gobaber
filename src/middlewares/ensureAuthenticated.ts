@@ -32,6 +32,8 @@ export default function ensureAuthentiicated(request: Request, response: Respons
             id: sub,
         };
 
+        // console.log(request.user.id)
+
         return next(); // continuar usando aplicação
 
     } catch (err) {

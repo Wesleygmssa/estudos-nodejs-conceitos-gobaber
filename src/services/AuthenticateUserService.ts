@@ -33,8 +33,8 @@ class AuthencateUserService {
         }
 
         const token = sign({}, authConfig.jwt.secret, {
-            subject: authConfig.jwt.expirenIn,
-            expiresIn: '1d',
+            subject: user.id, //Identificação do usuário que ficara global 
+            expiresIn: authConfig.jwt.expirenIn,
         });
 
         return {
