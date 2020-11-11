@@ -24,22 +24,18 @@ appointmentsRouter.get('/', async (request, response) => {
 
 appointmentsRouter.post('/', async (request, response) => {
 
-    try { //TRATATIVA DE ERRO.
-        const { provider_id, date } = request.body;
+    const { provider_id, date } = request.body;
 
-        const parseDate = parseISO(date);
+    const parseDate = parseISO(date);
 
-        const createAppointment = new CreateAppointmentServices();
+    const createAppointment = new CreateAppointmentServices();
 
-        const appointment = await createAppointment.execute({ provider_id, date: parseDate })
+    const appointment = await createAppointment.execute({ provider_id, date: parseDate })
 
-        return response.json(appointment);
+    return response.json(appointment);
 
-    } catch (error) { // throw Error('this appointment is already booked');
 
-        return response.status(400).json({ error: error.message });
-    }
 });
 
 
-export default appointmentsRouter
+export default appointmentsRouter;

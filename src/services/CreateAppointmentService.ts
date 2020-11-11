@@ -5,6 +5,7 @@ import Appointment from '../models/Appointment';
 import { startOfHour, } from 'date-fns';
 import AppointmentsRepository from '../repositories/AppointmentsRepository'; //PARA USAR O REPOSITORIO EXISTENTE
 import { getCustomRepository } from 'typeorm';
+import AppError from '../errors/AppError';
 
 interface Request {
     provider_id: string,
@@ -25,7 +26,7 @@ class CreateAppointmentService {
 
         if (FindAppointmentInSameDate) { //trativa de erro na rota
 
-            throw Error('this appointment is already booked');
+            throw new AppError('this appointment is already booked');
         }
 
         const appointment = appointmentsRepository.create({
