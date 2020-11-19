@@ -33,6 +33,7 @@ class AuthencateUserService {
             throw new AppError('Incorrect email/password combination', 401);
         }
 
+        //gerando token
         const token = sign({}, authConfig.jwt.secret, {
             subject: user.id, //Identificação do usuário que ficara global 
             expiresIn: authConfig.jwt.expirenIn,
