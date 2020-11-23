@@ -1,7 +1,7 @@
 //MODELS ESTÁ RELACIONADO COM UMA TABELA NO BANCO DE DADOS
 
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import User from './Users';
+import User from '@modules/users/infra/typeorm/entities/Users';
 
 /* Relacionamentos
 
