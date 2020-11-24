@@ -22,12 +22,8 @@ export default function ensureAuthentiicated(request: Request, response: Respons
     try {
 
         const decode = verify(token, authConfig.jwt.secret);
-        // console.log(decode)
 
         const { sub } = decode as tokenPayload;
-
-        // console.log(sub)
-
         //@types/express.d.ts
         request.user = {     //ADICIONANDO O ID DO USUÁRIO NAS REQUISIÇÕES NAS ROTAS Q SÃO AUTENTICADAS
             id: sub,
