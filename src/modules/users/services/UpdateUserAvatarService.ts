@@ -1,19 +1,29 @@
 import { getRepository } from 'typeorm';
-import User from '@modules/users/infra/typeorm/entities/Users';
 import path from 'path';
-import uploadConfig from '@config/upload';
 import fs from 'fs';
+import uploadConfig from '@config/upload';
+
+import IUsersRepository from '../I_Repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 
-interface Request {
+import User from '@modules/users/infra/typeorm/entities/Users';
+
+interface IRequest {
     user_id: string;
     avatarFileName: string;
 }
 class UpdateUserAvatarService {
-    public async execute({ user_id, avatarFileName }: Request): Promise<User> {
-        const usersRepository = getRepository(User); // R.pronto
+    //pegando repositorio
+    private usersRepository: IUsersRepository;
+    constructor(usersRepository: IUsersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
-        const user = await usersRepository.findOne(user_id); // user || underfined
+
+    public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
+        // const usersRepository = getRepository(User); // R.pronto
+
+        const user = await this.usersRepository.findById(user_id); // user || underfined
         console.log(user)
 
         if (!user) {
@@ -33,7 +43,7 @@ class UpdateUserAvatarService {
 
         user.avatar = avatarFileName; // atualize a nova foto
 
-        await usersRepository.save(user);
+        await this.usersRepository.save(user);
 
         return user;
     }
