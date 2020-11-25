@@ -3,7 +3,7 @@ import IAppointmentsRepository from '@modules/appointments/I_Repositories/IAppoi
 import Appointment from '../entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
-
+//metodos que interagem com banco de dados
 class AppointmentsRepository
     implements IAppointmentsRepository {
     private ormRepository: Repository<Appointment>
