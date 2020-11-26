@@ -1,16 +1,18 @@
+import 'reflect-metadata';
 import { uuid } from 'uuidv4';
 
+import Appointment from '../../infra/typeorm/entities/Appointment';
+
 import IAppointmentsRepository from '@modules/appointments/I_Repositories/IAppointmentsRepository';
-import Appointment from '../../entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
-//metodos que interagem com banco de dados
+//metodos javaScript puro / trabalhando variavel em memoria
 class AppointmentsRepository implements IAppointmentsRepository {
     private appointments: Appointment[] = [];
 
     public async findByDate(date: Date): Promise<Appointment | undefined> {
 
-        //encontrando uma data mesmo horario
+        //encontrando uma data mesmo horario retorna
         const findAppointment = this.appointments.find(appointment => {
             appointment.date = date;
         });
@@ -18,8 +20,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
         return findAppointment;
     }
 
-
-    public async create({ date, provider_id }: ICreateAppointmentDTO): Promise<Appointment> {
+    public async create({
+        date,
+        provider_id
+    }: ICreateAppointmentDTO): Promise<Appointment> {
         const appointment = new Appointment(); // criando um objeto
 
         // Object.assign(appointment, { id: uuid(), date, provider_id });
