@@ -1,6 +1,8 @@
-test('sum two numbers', () => {
-    expect(1 + 2).toBe(3);
-});
+//Primary Test
+
+// test('sum two numbers', () => {
+//     expect(1 + 2).toBe(3);
+// });
 
 // import FakeAppointmentRespository from '../infra/typeorm/repositories/fakes/FakeAppointmentRepository';
 // import CreateAppointmentService from './CreateAppointmentService';
