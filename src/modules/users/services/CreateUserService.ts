@@ -11,8 +11,9 @@ interface IRequest {
 
 class CreateUserSerive {
 
-    //pegando repositorio
+    //pegando repositorio , quando metodo é iniciado receber esses dados
     private usersRepository: IUsersRepository;
+
     constructor(usersRepository: IUsersRepository) {
         this.usersRepository = usersRepository;
     }
@@ -20,7 +21,6 @@ class CreateUserSerive {
     public async execute({ name, email, password }: IRequest): Promise<User> {
 
         // const usersRepository = getRepository(User);
-
         const checkUserExist = await this.usersRepository.findbyEmail(email);
 
         if (checkUserExist) {

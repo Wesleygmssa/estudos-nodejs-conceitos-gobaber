@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { uuid } from 'uuidv4';
+import { isEqual } from 'date-fns';
 
 import Appointment from '../../infra/typeorm/entities/Appointment';
 
@@ -11,11 +12,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
     private appointments: Appointment[] = [];
 
     public async findByDate(date: Date): Promise<Appointment | undefined> {
-
         //encontrando uma data mesmo horario retorna
-        const findAppointment = this.appointments.find(appointment => {
-            appointment.date = date;
-        });
+        const findAppointment = this.appointments.find(appointment =>
+            isEqual(appointment.date, date)
+        );
 
         return findAppointment;
     }
