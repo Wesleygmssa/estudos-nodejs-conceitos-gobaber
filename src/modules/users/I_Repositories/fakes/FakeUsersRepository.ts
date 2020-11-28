@@ -19,7 +19,6 @@ class UsersRepositor implements IUsersRepository {
         return user;
 
     }
-
     //metodo de criação e usuário.
     public async create({ email, name, password }: ICreateUserDTO): Promise<User> {
 

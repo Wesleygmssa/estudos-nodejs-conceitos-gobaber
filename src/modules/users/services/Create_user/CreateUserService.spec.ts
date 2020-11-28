@@ -1,9 +1,13 @@
 import AppError from '@shared/errors/AppError';
-import FakeUserRespository from '../I_Repositories/fakes/FakeUsersRepository';
+import FakeUserRespository from '../../I_Repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
+
+
+
 
 //teste unitario
 describe('CreateUser', () => {
+
     it('should be able to create new user', async () => {
 
         const fakeUserRespository = new FakeUserRespository();
@@ -25,8 +29,8 @@ describe('CreateUser', () => {
         const createUserService = new CreateUserService(fakeUserRespository);
 
         await createUserService.execute({
-            email: 'John Doe',
-            name: 'Johndoe@exemple.com',
+            name: 'John Doe',
+            email: 'Johndoe@exemple.com',
             password: '123456'
         });
 
@@ -36,6 +40,7 @@ describe('CreateUser', () => {
                 name: 'Johndoe@exemple.com',
                 password: '123456'
             }),
+
         ).rejects.toBeInstanceOf(AppError)
 
     });

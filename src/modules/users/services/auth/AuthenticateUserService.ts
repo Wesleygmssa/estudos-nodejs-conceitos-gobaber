@@ -1,9 +1,10 @@
-import { getRepository } from 'typeorm';
+// import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
+import { inject, injectable } from 'tsyringe';
 
-import IUsersRepository from '../I_Repositories/IUsersRepository';
+import IUsersRepository from '../../I_Repositories/IUsersRepository';
 
 import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/Users';
@@ -20,13 +21,19 @@ interface IResponse {
     token: string
 }
 
+@injectable()
 class AuthencateUserService {
 
-    //pegando repositorio
-    private usersRepository: IUsersRepository;
-    constructor(usersRepository: IUsersRepository) {
-        this.usersRepository = usersRepository;
-    }
+    // //pegando repositorio
+    // private usersRepository: IUsersRepository;
+    // constructor(usersRepository: IUsersRepository) {
+    //     this.usersRepository = usersRepository;
+    // }
+
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository: IUsersRepository
+    ) { }
 
     public async execute({ email, password }: IRequest): Promise<IResponse> {
         // const usersRepository = getRepository(User); // todos metodos

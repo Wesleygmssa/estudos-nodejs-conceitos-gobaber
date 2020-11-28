@@ -1,5 +1,6 @@
 // import AppointmentsRepository from '../infra/typeorm/repositories/AppointmentsRepository'; //PARA USAR O REPOSITORIO EXISTENTE
 import { startOfHour, } from 'date-fns';
+import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
@@ -11,12 +12,13 @@ interface Request {
     date: Date,
 }
 
+@injectable()
 class CreateAppointmentService {
     //pegando repositorio
-    private appointmentsRepository: IAppointmentsRepository;
-    constructor(appointmentsRepository: IAppointmentsRepository) {
-        this.appointmentsRepository = appointmentsRepository;
-    }
+    constructor(
+        @inject('AppointmentsRespository')
+        private appointmentsRepository: IAppointmentsRepository
+    ) { }
 
     public async execute({ provider_id, date }: Request): Promise<Appointment> {
 
