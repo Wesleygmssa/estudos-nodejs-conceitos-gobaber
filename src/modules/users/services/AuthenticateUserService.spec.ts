@@ -30,7 +30,51 @@ describe('AuthenticateUser', () => {
 
         // espero que na minha resposta tenha uma propriedade token
         expect(response).toHaveProperty('token');
-        expect(response.user).toEqual('user');
+        expect(response.user).toEqual(user);
+    });
+
+    it('should not be able to authenticate with non existing user ', async () => {
+
+        const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
+        const fakeHashProvider = new FakeHashProvider()
+
+        const authenticateUserService = new AuthenticateUserService(
+            fakeUserRespository,
+            fakeHashProvider
+        );
+
+
+        // espero que na minha resposta tenha uma propriedade token
+        expect(authenticateUserService.execute({
+            email: 'Wesleyguerra9@gmail.com',
+            password: '123456',
+        })
+        ).rejects.toBeInstanceOf(AppError);
+
+    });
+
+    it('should not be able to authenticate with wrong password', async () => {
+
+        const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
+        const fakeHashProvider = new FakeHashProvider()
+
+        const createUserService = new CreateUserService(fakeUserRespository, fakeHashProvider);
+        const authenticateUserService = new AuthenticateUserService(fakeUserRespository, fakeHashProvider);
+
+        //criando usuário
+        const user = await createUserService.execute({
+            name: 'Wesley',
+            email: 'Wesleyguerra9@gmail.com',
+            password: '123456',
+        });
+
+
+
+        // espero que na minha resposta tenha uma propriedade token
+        expect(authenticateUserService.execute({
+            email: 'Wesleyguerra9@gmail.com',
+            password: 'worng-password',
+        })).rejects.toBeInstanceOf(AppError);
     });
 
 });
