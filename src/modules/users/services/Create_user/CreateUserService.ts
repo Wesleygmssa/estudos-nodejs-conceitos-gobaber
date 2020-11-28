@@ -18,7 +18,10 @@ class CreateUserSerive {
     //pegando repositorio , quando metodo é iniciado receber esses dados
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository
+        private usersRepository: IUsersRepository,
+
+        @inject('HashProvider')
+        private hashProvider: IHashProvider,
     ) { }
 
     public async execute({ name, email, password }: IRequest): Promise<User> {
