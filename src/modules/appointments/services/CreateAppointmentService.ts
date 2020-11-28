@@ -28,7 +28,7 @@ class CreateAppointmentService {
             appointmentDate
         );
 
-        if (FindAppointmentInSameDate) { //tratativa de erro na rota
+        if (FindAppointmentInSameDate) {
             throw new AppError('this appointment is already booked');
         }
 

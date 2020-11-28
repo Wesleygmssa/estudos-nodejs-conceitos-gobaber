@@ -4,7 +4,7 @@ import fs from 'fs';
 import uploadConfig from '@config/upload';
 import { inject, injectable } from 'tsyringe';
 
-import IUsersRepository from '../../I_Repositories/IUsersRepository';
+import IUsersRepository from '../I_Repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/Users';

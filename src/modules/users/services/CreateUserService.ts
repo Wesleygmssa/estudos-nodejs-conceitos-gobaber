@@ -5,8 +5,8 @@ import { inject, injectable } from 'tsyringe';
 
 
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../../I_Repositories/IUsersRepository'
-import IHashProvider from '../../providers/HashProvider/models/IHashProvider';
+import IUsersRepository from '../I_Repositories/IUsersRepository'
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
     name: string, email: string, password: string;

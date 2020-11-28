@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 // import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import { container } from 'tsyringe';
 
-import CreateUserService from '@modules/users/services/Create_user/CreateUserService';
+import CreateUserService from '@modules/users/services/CreateUserService';
 
 export default class UsersController {
     public async create(request: Request, response: Response) {

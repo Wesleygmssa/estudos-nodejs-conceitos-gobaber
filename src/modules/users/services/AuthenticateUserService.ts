@@ -4,8 +4,8 @@ import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import { inject, injectable } from 'tsyringe';
 
-import IUsersRepository from '../../I_Repositories/IUsersRepository';
-import IHashProvider from '../../providers/HashProvider/models/IHashProvider';
+import IUsersRepository from '../I_Repositories/IUsersRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/Users';
@@ -25,7 +25,7 @@ interface IResponse {
 @injectable()
 class AuthencateUserService {
 
-    // //pegando repositorio
+    // //pegando repositorio 
     // private usersRepository: IUsersRepository;
     // constructor(usersRepository: IUsersRepository) {
     //     this.usersRepository = usersRepository;
@@ -50,6 +50,7 @@ class AuthencateUserService {
 
         //user.password = senha criptografada
         const passwordMatched = await this.hashProvider.compareHash(password, user.password);
+        // console.log(passwordMatched)
 
         if (!passwordMatched) {
             throw new AppError('Incorrect email/password combination', 401);

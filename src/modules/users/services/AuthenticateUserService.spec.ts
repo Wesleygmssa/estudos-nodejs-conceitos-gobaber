@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
-import FakeUserRespository from '../../I_Repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider';
+import FakeUserRespository from '../I_Repositories/fakes/FakeUsersRepository';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserService from './AuthenticateUserService';
-import CreateUserService from '../Create_user/CreateUserService';
+import CreateUserService from './CreateUserService';
 
 //teste unitario
 describe('AuthenticateUser', () => {
