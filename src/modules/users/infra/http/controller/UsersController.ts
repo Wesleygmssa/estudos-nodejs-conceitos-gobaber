@@ -1,13 +1,9 @@
 import { Request, Response } from 'express';
-
-// import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import { container } from 'tsyringe';
-
 import CreateUserService from '@modules/users/services/CreateUserService';
 
 export default class UsersController {
     public async create(request: Request, response: Response) {
-        // const usersRepository = new UsersRepository();
         const createUserService = container.resolve(CreateUserService);
 
         const { name, email, password } = request.body;
@@ -17,3 +13,10 @@ export default class UsersController {
         return response.json(user);
     }
 }
+
+/*
+Abstrair arquivo das rotas
+Receber requisição
+repassar pra outro arquivo lidar com isso.
+retorna uma respota
+*/

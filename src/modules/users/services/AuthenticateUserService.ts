@@ -71,3 +71,9 @@ class AuthencateUserService {
 }
 
 export default AuthencateUserService;
+
+
+/*
+Regra de negocio da aplicação
+recebe a class do repositorio para interação com banco dados
+*/

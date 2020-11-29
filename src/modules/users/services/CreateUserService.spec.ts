@@ -5,8 +5,6 @@ import FakeUserRespository from '../I_Repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 
 
-
-
 //teste unitario
 describe('CreateUser', () => {
 

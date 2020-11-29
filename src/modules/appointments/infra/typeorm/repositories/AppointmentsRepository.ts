@@ -11,6 +11,13 @@ class AppointmentsRepository
         this.ormRepository = getRepository(Appointment)
     }
 
+    // public async findByDate(date: Date): Promise<Appointment | undefined> {
+    //     const FindAppointment = await this.ormRepository.findOne({
+    //         where: { date: date }
+    //     });
+    //     return FindAppointment;
+    // }
+
     public async findByDate(date: Date): Promise<Appointment | undefined> {
         const FindAppointment = await this.ormRepository.findOne({
             where: { date: date }

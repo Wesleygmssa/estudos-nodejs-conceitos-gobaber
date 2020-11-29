@@ -8,7 +8,7 @@ import routes from './routes';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import '@shared/infra/typeorm'; // importando conexão database 
-import '@shared/container';
+import '@shared/container'; // injeção de dependecia
 
 const app = express();
 app.use(cors());

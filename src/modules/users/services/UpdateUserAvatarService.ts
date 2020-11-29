@@ -1,4 +1,3 @@
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 import uploadConfig from '@config/upload';
@@ -13,6 +12,7 @@ interface IRequest {
     user_id: string;
     avatarFileName: string;
 }
+@injectable()
 class UpdateUserAvatarService {
 
     constructor(
@@ -25,7 +25,7 @@ class UpdateUserAvatarService {
         // const usersRepository = getRepository(User); // R.pronto
 
         const user = await this.usersRepository.findById(user_id); // user || underfined
-        console.log(user)
+        // console.log(user);
 
         if (!user) {
             throw new AppError('Only authenticated users can change avatar', 401);
@@ -49,5 +49,9 @@ class UpdateUserAvatarService {
         return user;
     }
 }
-
 export default UpdateUserAvatarService;
+
+/*
+Regra de negocio da aplicação
+recebe a class do repositorio para interação com banco dados
+*/

@@ -16,14 +16,12 @@ interface Request {
 class CreateAppointmentService {
     //pegando repositorio
     constructor(
-        @inject('AppointmentsRespository')
+        @inject('AppointmentsRepository') // chamando repositorio
         private appointmentsRepository: IAppointmentsRepository
     ) { }
 
     public async execute({ provider_id, date }: Request): Promise<Appointment> {
-
         const appointmentDate = startOfHour(date);
-
         const FindAppointmentInSameDate = await this.appointmentsRepository.findByDate(
             appointmentDate
         );
@@ -37,8 +35,7 @@ class CreateAppointmentService {
             date: appointmentDate
         });
 
-
-        return appointment //RETORNADO UM AGENDAMENTO
+        return appointment; //RETORNADO UM AGENDAMENTO
     }
 }
 export default CreateAppointmentService;

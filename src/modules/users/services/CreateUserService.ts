@@ -47,3 +47,9 @@ class CreateUserSerive {
 }
 
 export default CreateUserSerive;
+
+
+/*
+Regra de negocio da aplicação
+recebe a class do repositorio para interação com banco dados
+*/
