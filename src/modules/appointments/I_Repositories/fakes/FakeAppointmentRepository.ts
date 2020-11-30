@@ -7,35 +7,26 @@ import Appointment from '../../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '@modules/appointments/I_Repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
-//metodos javaScript puro / trabalhando variavel em memoria
+// metodos javaScript puro // trabalhando variavel em memoria
 class AppointmentsRepository implements IAppointmentsRepository {
-    private appointments: Appointment[] = [];
+    private appointments: Appointment[] = []; // variavel de appointments para armazenamento
 
     public async findByDate(date: Date): Promise<Appointment | undefined> {
-        //encontrando uma data mesmo horario retorna
         const findAppointment = this.appointments.find(appointment =>
-            isEqual(appointment.date, date)
+            isEqual(appointment.date, date),
         );
 
         return findAppointment;
     }
 
-    public async create({
-        date,
-        provider_id
-    }: ICreateAppointmentDTO): Promise<Appointment> {
-        const appointment = new Appointment(); // criando um objeto
-
-        // Object.assign(appointment, { id: uuid(), date, provider_id });
-
+    public async create({ date, provider_id }: ICreateAppointmentDTO): Promise<Appointment> {
+        const appointment = new Appointment();
         appointment.id = uuid();
         appointment.date = date;
         appointment.provider_id = provider_id;
-
+        // Object.assign(appointment, { id: uuid(), date, provider_id });
         this.appointments.push(appointment);
-
         return appointment
-
     }
 }
 

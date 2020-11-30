@@ -24,7 +24,7 @@ describe('CreateUser', () => {
 
     });
 
-    it('should be able to create a new user with same email from another', async () => {
+    it('should not be able to create a new user with same email from another', async () => {
 
         const fakeUserRespository = new FakeUserRespository();
         const fakeHashProvider = new FakeHashProvider();
@@ -38,8 +38,8 @@ describe('CreateUser', () => {
 
         expect(
             createUserService.execute({
-                email: 'John Doe',
-                name: 'Johndoe@exemple.com',
+                name: 'John Doe',
+                email: 'Johndoe@exemple.com',
                 password: '123456'
             }),
 

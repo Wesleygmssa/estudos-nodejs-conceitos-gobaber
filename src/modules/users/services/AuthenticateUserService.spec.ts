@@ -6,7 +6,6 @@ import CreateUserService from './CreateUserService';
 
 //teste unitario
 describe('AuthenticateUser', () => {
-
     it('should be able to authenticate', async () => {
 
         const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
@@ -29,12 +28,11 @@ describe('AuthenticateUser', () => {
         });
 
         // espero que na minha resposta tenha uma propriedade token
-        expect(response).toHaveProperty('token');
+        expect(response).toHaveProperty('token'); //usuário autenticado.
         expect(response.user).toEqual(user);
     });
 
     it('should not be able to authenticate with non existing user ', async () => {
-
         const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
         const fakeHashProvider = new FakeHashProvider()
 
@@ -43,8 +41,6 @@ describe('AuthenticateUser', () => {
             fakeHashProvider
         );
 
-
-        // espero que na minha resposta tenha uma propriedade token
         expect(authenticateUserService.execute({
             email: 'Wesleyguerra9@gmail.com',
             password: '123456',
@@ -54,7 +50,6 @@ describe('AuthenticateUser', () => {
     });
 
     it('should not be able to authenticate with wrong password', async () => {
-
         const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
         const fakeHashProvider = new FakeHashProvider()
 
@@ -67,8 +62,6 @@ describe('AuthenticateUser', () => {
             email: 'Wesleyguerra9@gmail.com',
             password: '123456',
         });
-
-
 
         // espero que na minha resposta tenha uma propriedade token
         expect(authenticateUserService.execute({

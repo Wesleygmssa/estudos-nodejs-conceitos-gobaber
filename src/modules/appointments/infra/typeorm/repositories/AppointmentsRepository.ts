@@ -4,19 +4,12 @@ import Appointment from '../entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
 //metodos que interagem com banco de dados
-class AppointmentsRepository
-    implements IAppointmentsRepository {
+class AppointmentsRepository implements IAppointmentsRepository {
     private ormRepository: Repository<Appointment>
     constructor() {
         this.ormRepository = getRepository(Appointment)
     }
 
-    // public async findByDate(date: Date): Promise<Appointment | undefined> {
-    //     const FindAppointment = await this.ormRepository.findOne({
-    //         where: { date: date }
-    //     });
-    //     return FindAppointment;
-    // }
 
     public async findByDate(date: Date): Promise<Appointment | undefined> {
         const FindAppointment = await this.ormRepository.findOne({

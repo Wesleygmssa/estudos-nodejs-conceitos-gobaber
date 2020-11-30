@@ -17,7 +17,7 @@ class CreateAppointmentService {
     //pegando repositorio
     constructor(
         @inject('AppointmentsRepository') // chamando repositorio
-        private appointmentsRepository: IAppointmentsRepository
+        private appointmentsRepository: IAppointmentsRepository,
     ) { }
 
     public async execute({ provider_id, date }: Request): Promise<Appointment> {

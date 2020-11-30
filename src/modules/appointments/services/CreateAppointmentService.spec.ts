@@ -1,9 +1,3 @@
-//Primary Test
-
-// test('sum two numbers', () => {
-//     expect(1 + 2).toBe(3);
-// });
-
 import AppError from '@shared/errors/AppError';
 import FakeAppointmentRespository from '../I_Repositories/fakes/FakeAppointmentRepository';
 import CreateAppointmentService from './CreateAppointmentService';
@@ -14,7 +8,6 @@ describe('CreateAppointment', () => {
     it('should be able to create new appoinment', async () => {
 
         const fakeAppointmentRespository = new FakeAppointmentRespository();
-        //inversão de dependencia
         const createAppointmentService = new CreateAppointmentService(fakeAppointmentRespository);
 
         const appoinment = await createAppointmentService.execute({
@@ -32,14 +25,24 @@ describe('CreateAppointment', () => {
 
         const appointmentDate = new Date(2020, 4, 10, 11);
 
+        //criando agendamento não tem retorno
         await createAppointmentService.execute({
             date: appointmentDate,
             provider_id: '123123',
         });
 
+        // criando outro agendamento na mesma data retornando um erro
         expect(createAppointmentService.execute({
             date: appointmentDate,
             provider_id: '123123',
         })).rejects.toBeInstanceOf(AppError)
     });
 })
+
+
+
+//Primary Test
+
+// test('sum two numbers', () => {
+//     expect(1 + 2).toBe(3);
+// });

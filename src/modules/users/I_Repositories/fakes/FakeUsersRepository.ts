@@ -10,16 +10,15 @@ class UsersRepositor implements IUsersRepository {
     private users: User[] = []
 
     public async findById(id: string): Promise<User | undefined> {
-        const user = this.users.find(user => user.id === id)
-        return user;
+        const findUser = this.users.find(user => user.id === id)
+        return findUser;
     }
 
     public async findbyEmail(email: string): Promise<User | undefined> {
-        const user = this.users.find(user => user.email === email)
-        return user;
-
+        const findUser = this.users.find(user => user.email === email);
+        return findUser;
     }
-    //metodo de criação e usuário.
+
     public async create({ email, name, password }: ICreateUserDTO): Promise<User> {
 
         const user = new User();
@@ -31,7 +30,7 @@ class UsersRepositor implements IUsersRepository {
         user.name = name;
         user.password = password;
 
-        this.users.push(user)
+        this.users.push(user); // jogando usuário no array
 
         return user;
     }
