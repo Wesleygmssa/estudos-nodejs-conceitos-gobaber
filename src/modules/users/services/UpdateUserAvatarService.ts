@@ -3,8 +3,9 @@ import fs from 'fs';
 import uploadConfig from '@config/upload';
 import { inject, injectable } from 'tsyringe';
 
-import IUsersRepository from '../I_Repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from '../I_Repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 
 import User from '@modules/users/infra/typeorm/entities/Users';
 
@@ -17,7 +18,10 @@ class UpdateUserAvatarService {
 
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository
+        private usersRepository: IUsersRepository,
+
+        @inject('StorageProvider')
+        private StorageProvider: IStorageProvider,
     ) { }
 
 
@@ -32,17 +36,13 @@ class UpdateUserAvatarService {
         }
 
         if (user.avatar) {
-            // deletar avatar anterior
-            const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
+            await this.StorageProvider.deleteFile(user.avatar)
 
-            const userAvatarFileExistis = await fs.promises.stat(userAvatarFilePath); //verificar se arq exist
-
-            if (userAvatarFileExistis) {
-                await fs.promises.unlink(userAvatarFilePath);
-            }
         }
 
-        user.avatar = avatarFileName; // atualize a nova foto
+        const filename = await this.StorageProvider.saveFile(user.avatar);
+
+        user.avatar = filename; // atualize a nova foto
 
         await this.usersRepository.save(user);
 

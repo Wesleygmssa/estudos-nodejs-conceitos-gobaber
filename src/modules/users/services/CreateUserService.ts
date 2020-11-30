@@ -20,7 +20,7 @@ class CreateUserSerive {
         @inject('UsersRepository')
         private usersRepository: IUsersRepository,
 
-        @inject('HashProvider')
+        @inject('HashProvider') // implements BCryptHashProvider.ts
         private hashProvider: IHashProvider,
     ) { }
 
