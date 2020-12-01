@@ -41,7 +41,7 @@ describe('AuthenticateUser', () => {
             fakeHashProvider
         );
 
-        expect(authenticateUserService.execute({
+        await expect(authenticateUserService.execute({
             email: 'Wesleyguerra9@gmail.com',
             password: '123456',
         })
@@ -64,7 +64,7 @@ describe('AuthenticateUser', () => {
         });
 
         // espero que na minha resposta tenha uma propriedade token
-        expect(authenticateUserService.execute({
+        await expect(authenticateUserService.execute({
             email: 'Wesleyguerra9@gmail.com',
             password: 'worng-password',
         })).rejects.toBeInstanceOf(AppError);
