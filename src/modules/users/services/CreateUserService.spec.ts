@@ -15,8 +15,8 @@ describe('CreateUser', () => {
         const createUserService = new CreateUserService(fakeUserRespository, fakeHashProvider);
 
         const user = await createUserService.execute({
-            email: 'John Doe',
-            name: 'Johndoe@exemple.com',
+            name: 'John Doe',
+            email: 'Johndoe@exemple.com',
             password: '123456'
         });
 
