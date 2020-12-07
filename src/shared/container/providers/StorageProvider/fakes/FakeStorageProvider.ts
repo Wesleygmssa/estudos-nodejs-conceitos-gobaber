@@ -1,7 +1,7 @@
 import IStorageProvider from '../models/IStorageProvider';
 
 class FakeStorageProvider implements IStorageProvider {
-    private storage: string[] = [];
+    private storage: string[] = []; //arquivos que já foram feitos uploads
 
     public async saveFile(file: string): Promise<string> {
         this.storage.push(file);
@@ -18,3 +18,4 @@ class FakeStorageProvider implements IStorageProvider {
 }
 
 export default FakeStorageProvider;
+//OBS: arquivo utilizado para teste;
