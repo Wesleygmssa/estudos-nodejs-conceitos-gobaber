@@ -4,6 +4,7 @@ import UserToken from '@modules/users/infra/typeorm/entities/UserToken';
 
 
 class FakeUserTokensRepository implements IUserTokensRepository {
+
     private userTokens: UserToken[] = [] //fake banco de dados
 
     public async generate(user_id: string): Promise<UserToken> {
@@ -11,15 +12,15 @@ class FakeUserTokensRepository implements IUserTokensRepository {
         //gerando tipo de token
         const userToken = new UserToken();
 
-        // Object.assign(userToken, {
-        //     id: uuid(),
-        //     token: uuid(),
-        //     user_id
-        // })
+        Object.assign(userToken, {
+            id: uuid(),
+            token: uuid(),
+            user_id
+        })
 
-        userToken.id = uuid();
-        userToken.token = uuid();
-        user_id;
+        // userToken.id = uuid();
+        // userToken.token = uuid();
+        // user_id;
 
         this.userTokens.push(userToken)
 

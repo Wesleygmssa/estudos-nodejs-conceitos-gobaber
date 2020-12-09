@@ -1,5 +1,3 @@
-// import AppError from '@shared/errors/AppError';
-
 import FakeUserRespository from '../I_Repositories/fakes/FakeUsersRepository'; // repositorio para teste
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
@@ -14,7 +12,7 @@ describe('UpdateUserAvatar', () => {
         const fakeStorageProvider = new FakeStorageProvider();
 
 
-        const UpdateUserAvatar = new UpdateUserAvatarService( // inversão de dependencia
+        const updateUserAvatar = new UpdateUserAvatarService( // inversão de dependencia
             fakeUserRespository,
             fakeStorageProvider
         )
@@ -25,14 +23,13 @@ describe('UpdateUserAvatar', () => {
             password: '123456'
         })
 
-        await UpdateUserAvatar.execute({
+        await updateUserAvatar.execute({
             user_id: user.id,
             avatarFileName: 'avatar.jpg'
-
         });
 
 
-        expect(user.avatar).toHaveProperty('avatar.jpg');
+        expect(user.avatar).toBe('avatar.jpg');
     });
 
     it('should not be able to update avatar from non existing user', async () => {
@@ -45,7 +42,7 @@ describe('UpdateUserAvatar', () => {
             fakeStorageProvider
         )
 
-        expect(UpdateUserAvatar.execute({
+        await expect(UpdateUserAvatar.execute({
             user_id: 'non-existing-user',
             avatarFileName: 'avatar.jpg'
 

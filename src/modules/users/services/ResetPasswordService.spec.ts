@@ -31,22 +31,23 @@ describe('ResetPassword', () => {
         const user = await fakeUsersRepository.create({
             name: 'John Doe',
             email: 'johndoe@example.com',
-            password: '123456789'
+            password: '123456'
         })
 
         //criando token
-        const userToken = await fakeUserTokensRepository.generate(user.id);
+        const { token } = await fakeUserTokensRepository.generate(user.id);
 
         //trocando a senha
         await resetPassword.execute({
             password: '987654321',
-            token: userToken.token,
+            token,
         });
 
 
         const updatedUser = await fakeUsersRepository.findById(user.id);
 
-        expect(updatedUser?.id).toBe('987654321');
+
+        expect(updatedUser?.password).toBe('987654321');
     });
 
 });

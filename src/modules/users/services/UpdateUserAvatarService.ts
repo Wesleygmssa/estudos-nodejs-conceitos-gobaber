@@ -26,7 +26,6 @@ class UpdateUserAvatarService {
 
 
     public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
-        // const usersRepository = getRepository(User); // R.pronto
 
         const user = await this.usersRepository.findById(user_id); // user || underfined
         // console.log(user);
@@ -39,7 +38,7 @@ class UpdateUserAvatarService {
             await this.StorageProvider.deleteFile(user.avatar);
         }
 
-        const filename = await this.StorageProvider.saveFile(user.avatar);
+        const filename = await this.StorageProvider.saveFile(avatarFileName);
 
         user.avatar = filename;  //atualize a nova foto
 
