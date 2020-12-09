@@ -27,17 +27,17 @@ describe('ResetPassword', () => {
     // deve ser capaz de resetar a senha
     it('should be able to reset the password', async () => {
 
-        //criando usuário
+
         const user = await fakeUsersRepository.create({
             name: 'John Doe',
             email: 'johndoe@example.com',
             password: '123456'
         })
 
-        //criando token
+
         const { token } = await fakeUserTokensRepository.generate(user.id);
 
-        //trocando a senha
+
         await resetPassword.execute({
             password: '987654321',
             token,

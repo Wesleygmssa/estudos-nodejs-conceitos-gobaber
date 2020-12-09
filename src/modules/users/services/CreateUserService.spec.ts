@@ -20,7 +20,7 @@ describe('CreateUser', () => {
             password: '123456'
         });
 
-        expect(user).toHaveProperty('id')
+        expect(user).toHaveProperty('id'); //verificando usuário pelo id
 
     });
 

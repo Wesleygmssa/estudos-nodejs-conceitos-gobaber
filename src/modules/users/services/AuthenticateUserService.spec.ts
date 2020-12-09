@@ -65,7 +65,7 @@ describe('AuthenticateUser', () => {
             password: '123456',
         });
 
-        // espero que na minha resposta tenha uma propriedade token
+
         await expect(authenticateUserService.execute({
             email: 'Wesleyguerra9@gmail.com',
             password: 'worng-password',
