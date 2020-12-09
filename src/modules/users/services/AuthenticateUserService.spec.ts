@@ -6,6 +6,8 @@ import CreateUserService from './CreateUserService';
 
 //teste unitario
 describe('AuthenticateUser', () => {
+
+
     it('should be able to authenticate', async () => {
 
         const fakeUserRespository = new FakeUserRespository(); // criando um repositorio do zero
