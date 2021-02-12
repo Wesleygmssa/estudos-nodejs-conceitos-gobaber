@@ -3,6 +3,10 @@
  Gobaber - RocketSeat -NodeJS
 </h3>
 
+<p align="center">
+   <img src="https://github.com/Wesleygmssa/gobaber-web/raw/master/01.PNG" >
+</p>
+
 ### :computer: How To Run
 
  * Primeiro instale as dependencias:
