@@ -1,4 +1,4 @@
-# Recuperação de senha
+
 <h3 align="center">
  Bobaber - RocketSeat
 </h3>
@@ -31,7 +31,7 @@ Depois que o merge da sua pull request for feito, você pode deletar a sua branc
 
 Make with ♥ by Wesley Guerra :wave:
 
-
+# Recuperação de senha
 
 **RF** *Funcionalidades*
 
