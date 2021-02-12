@@ -42,7 +42,7 @@ describe('SendForgotPasswordEmail', () => {
         expect(sendEmail).toHaveBeenCalled();
     });
 
-    //Não deve ser capaz de recuperar a senha se usuário não existente
+    //Não deve ser capaz de recuperar a senha se usuário não existi
     it('should not be able to recover a non-existing user password', async () => {
 
 

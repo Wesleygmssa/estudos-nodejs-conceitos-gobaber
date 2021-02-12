@@ -5,6 +5,7 @@ import CreateAppointmentService from './CreateAppointmentService';
 //teste unitario
 describe('CreateAppointment', () => {
 
+    //deve ser capaz de criar um agendamento
     it('should be able to create new appoinment', async () => {
 
         const fakeAppointmentRespository = new FakeAppointmentRespository();

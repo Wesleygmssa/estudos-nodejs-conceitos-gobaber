@@ -7,12 +7,8 @@
 import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
-
 import UsersController from '../controller/UsersController';
-
 import UserAvatarController from '../controller/UserAvatarController';
-
-
 import ensureAuthenticate from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();

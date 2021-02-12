@@ -21,7 +21,9 @@ class CreateAppointmentService {
     ) { }
 
     public async execute({ provider_id, date }: Request): Promise<Appointment> {
-        const appointmentDate = startOfHour(date);
+
+        const appointmentDate = startOfHour(date); // transformação 
+
         const FindAppointmentInSameDate = await this.appointmentsRepository.findByDate(
             appointmentDate
         );

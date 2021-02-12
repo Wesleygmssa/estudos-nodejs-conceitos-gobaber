@@ -79,8 +79,8 @@ describe('UpdateUserAvatar', () => {
 
         });
 
-        expect(deleteFile).toHaveBeenCalledWith('avatar'); // funcção tenha sido chamada com parametro especifico
-        expect(user.avatar).toBe('avatar2.jpg');
+        await expect(deleteFile).toHaveBeenCalledWith('avatar'); // funcção tenha sido chamada com parametro especifico
+        await expect(user.avatar).toBe('avatar2.jpg');
     });
 
 });
