@@ -1,6 +1,6 @@
 
 <h3 align="center">
- Bobaber - RocketSeat
+ Gobaber - RocketSeat -NodeJS
 </h3>
 
 ### :computer: How To Run
